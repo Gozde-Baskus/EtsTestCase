@@ -1,0 +1,37 @@
+.addPageWrapper{
+
+  .form-control {
+    height: 70px;
+    width: 250px;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+  }
+
+  .btn {
+    width: 150px;
+    height: 60px;
+    background: rgb(73, 75, 254);
+    background: linear-gradient(90deg, rgba(73, 75, 254, 1) 0%, rgba(6, 106, 253, 1) 100%);
+
+  }
+
+  .successBtn {
+    line-height: 30px;
+
+
+    .btn {
+      position: relative;
+      border: none;
+      width: 150px;
+      height: 60px;
+      background: #51c708;
+    }
+
+    .material-icons {
+      position: absolute;
+      left: 14px;
+    }
+  }
+}

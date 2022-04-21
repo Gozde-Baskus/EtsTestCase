@@ -1,0 +1,157 @@
+.listWrapper {
+  width: 300px;
+
+  .listTitle {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+
+  .btn-secondary {
+    background: #ffffff;
+    color: #000000;
+    width: 200px;
+    border: none;
+    box-shadow: 0px 0px 7px rgba(138, 138, 138, 0.4);
+  }
+
+  .btn-secondary:focus {
+
+    box-shadow: 2px 2px 2px rgba(138, 138, 138, 0.4);
+  }
+
+  .hotelCard {
+    background: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px rgba(138, 138, 138, 0.4);
+    margin: 10px 0;
+    height: 100px;
+    padding: 6px;
+    position: relative;
+
+    .hotelsPointArea {
+      background: #f6f9fd;
+      color: #15c6bd;
+      font-size: 13px;
+      width: 50%;
+    }
+
+    .deleteButton {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+
+      .material-icons {
+        color: #da1e27;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  .hotelCard:hover {
+    background: #f6f9fd;
+  }
+
+  .hotelsPointBtnWrapper .btn {
+    font-size: 12px;
+  }
+
+  .page-item.active .page-link {
+    background-color: white;
+    color: black;
+    border: none;
+    font-weight: bold;
+  }
+
+  .page-link {
+    background-color: white;
+    color: black;
+    border: none;
+
+  }
+
+  .page-link:focus {
+    box-shadow: none;
+  }
+
+  .page-item:first-child .page-link, .page-item:last-child .page-link {
+    display: none;
+  }
+
+  .material-icons {
+    padding-top: 5px;
+  }
+}
+
+.modalWrapper {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  height: 100%;
+  top: 0;
+  background-color: #00000033;
+  z-index: 9999999;
+  left: 0;
+  align-items: center;
+}
+
+.hotelDeleteModal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 9;
+  border-radius: 5px;
+  background-color: white;
+  margin: auto;
+  top: 30%;
+  text-align: center;
+  padding: 30px;
+  right: 0;
+  left: 0;
+  width: 400px;
+  height: 250px;
+  box-shadow: 2px 2px 5px 0 #acacac;
+
+  .btn-primary {
+    position: relative;
+    border: none;
+    width: 150px;
+    height: 60px;
+    background: rgb(73, 75, 254);
+    background: linear-gradient(90deg, rgba(73, 75, 254, 1) 0%, rgba(6, 106, 253, 1) 100%);
+
+  }
+
+  .btn-outline-primary, .btn-outline-primary:hover {
+    position: relative;
+    width: 150px;
+    height: 60px;
+    background-color: white;
+    color: #0e68fd;
+
+
+  }
+
+  .successBtn {
+    line-height: 30px;
+
+    .btn {
+      position: relative;
+      border: none;
+      width: 150px;
+      height: 60px;
+      background: #51c708;
+    }
+
+    .material-icons {
+      position: absolute;
+      left: 14px;
+    }
+  }
+}
