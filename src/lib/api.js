@@ -15,17 +15,16 @@ const addHotels = async (hotel) => {
 }
 
 const increasePoint = async (hotel) => {
+
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
         hotels.map(itemD => {
             if (itemD.id === hotel.id && hotel.point <= 9) {
                 itemD.point = Number(itemD.point) + 1
             }
-
         });
+
         localStorage.setItem("@hotels", JSON.stringify(hotels))
-
-
 
         return {success: true}
     } catch (e) {

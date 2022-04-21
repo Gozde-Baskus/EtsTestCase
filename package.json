@@ -16,6 +16,7 @@
     "node-sass": "^7.0.1",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
+    "tiny-emitter": "^2.1.0",
     "vue": "^3.2.13",
     "vue-material-design-icons": "^5.0.0",
     "vue-router": "^4.0.14",

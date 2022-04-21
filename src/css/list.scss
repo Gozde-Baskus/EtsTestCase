@@ -90,11 +90,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+
   height: 100%;
   top: 0;
-  background-color: #00000033;
+  background-color: rgba(89, 86, 103, 0.6);
   z-index: 9999999;
   left: 0;
   align-items: center;
