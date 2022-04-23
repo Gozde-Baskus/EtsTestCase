@@ -6,7 +6,10 @@ const getHotels = async () => {
 const addHotels = async (hotel) => {
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
-        hotels.unshift(hotel);
+        hotels.push({
+            ...hotel,
+            createdAt: Date.now()
+        });
         localStorage.setItem("@hotels", JSON.stringify(hotels))
         return {success: true}
     } catch (e) {
@@ -18,11 +21,12 @@ const increasePoint = async (hotel) => {
 
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
-        hotels.map(itemD => {
-            if (itemD.id === hotel.id && hotel.point <= 9) {
-                itemD.point = Number(itemD.point) + 1
-            }
-        });
+
+        const found = hotels.find((item=>item.id === hotel.id));
+        if(found) {
+            found.point = Math.min(10, Number(found.point) + 1);
+            found.updatedAt = Date.now();
+        }
 
         localStorage.setItem("@hotels", JSON.stringify(hotels))
 
@@ -35,27 +39,30 @@ const increasePoint = async (hotel) => {
 const decreasePoint = async (hotel) => {
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
-        hotels.map(itemD => {
-            if (itemD.id === hotel.id && hotel.point >= 1) {
-                itemD.point = itemD.point - 1
-            }
-
-        });
+        const found = hotels.find((item=>item.id === hotel.id));
+        if(found) {
+            found.point = Math.max(0, Number(found.point) -1);
+            found.updatedAt = Date.now();
+        }
         localStorage.setItem("@hotels", JSON.stringify(hotels))
-
-
-
         return {success: true}
     } catch (e) {
         return {success: false}
     }
 }
 
-const deleteHotels = async (hotel) => {
+const deleteHotels = async (id) => {
 
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
-        hotels.splice(hotel, 1);
+        const found = hotels.find((item=>item.id === id));
+        if(found) {
+            const deleteItemIndex = hotels.indexOf(found);
+            hotels.splice(deleteItemIndex, 1);
+        } else  {
+            return {success: false, message: "Hotel not found with id"}
+        }
+
         localStorage.setItem("@hotels", JSON.stringify(hotels))
         return {success: true}
     } catch (e) {

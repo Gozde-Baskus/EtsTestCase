@@ -1,36 +1,29 @@
 <template>
 
   <div class="d-flex justify-content-center ">
-
-
-
-    <div class="d-flex flex-column text-xl-start listWrapper justify-content-lg-between">
+    <div class="d-flex flex-column text-xl-start hotelsList justify-content-lg-between">
       <div class="d-flex mt-2">
         <div class="me-2">
-          <b-button variant="outline-primary" @click="goAddPage()"><span class="material-icons">add</span></b-button>
+          <b-button class="hotelsList--addBtn" variant="outline-primary" @click="goAddPage()"><span
+              class="material-icons">add</span></b-button>
         </div>
-        <div class="listTitle">OTEL EKLE</div>
+        <div class="hotelsList--title">OTEL EKLE</div>
       </div>
-      <div class="mt-2" v-if="this.hotels.length!==0">
-        <b-dropdown id="dropdown-offset" offset="25" text="Sıralama">
-          <b-dropdown-item @click="sortType(item)" v-for="(item, index) in sortList" :key="index">{{
-              item.name
-            }}
-          </b-dropdown-item>
-
-
-        </b-dropdown>
+      <div v-if="this.hotels.length!==0">
+        <SortDropdown/>
       </div>
-      <HotelCard @mouseenter="showDeleteBtn=hotel" @mouseleave="showDeleteBtn=false" :hotel="hotel" :index="index"
+      <HotelCard :hotel="hotel" :index="index"
                  v-for="(hotel, index) in pagedHotels" :key="index"/>
-      <div v-if="this.hotels.length >5" class="d-flex justify-content-center overflow-auto mt-2">
-        <b-pagination
-            v-model="currentPage"
-            :total-rows="this.hotels.length"
-            :per-page="perPage"
+      <div v-if="this.hotels.length > perPage" class="d-flex justify-content-center overflow-auto mt-2 ">
+        <b-pagination class="hotelsList--pagination"
+                      v-model="currentPage"
+                      :total-rows="this.hotels.length"
+                      :per-page="perPage"
         ></b-pagination>
 
       </div>
+
+      <HotelDeleteModal />
     </div>
 
 

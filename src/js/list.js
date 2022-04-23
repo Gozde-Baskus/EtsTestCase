@@ -2,33 +2,22 @@ import {getHotels} from "@/lib/api";
 import router from "@/router";
 import HotelCard from "@/components/HotelCard";
 import EventBus from "@/lib/event";
+import SortDropdown from "@/components/SortDropdown";
+import HotelDeleteModal from "@/components/HotelDeleteModal";
+
 export default {
     data() {
         return {
             hotels: [],
             currentPage: 1,
             perPage: 5,
-            sortList: [
-                {
-                    name: 'Default',
-                    id: 0
-                },
-                {
-                    name: 'Puan (Artan)',
-                    id: 1
-                },
-                {
-                    name: 'Puan (Azalan)',
-                    id: 2
-                },
-            ],
-            selectedSortTypeID: 0,
+            sortTypeID: 0,
             imageNot: require('../assets/hotelImg.png'),
 
         }
     },
     watch: {},
-    components: {HotelCard},
+    components: {HotelCard, SortDropdown, HotelDeleteModal},
     computed: {
         rows() {
             return this.hotels.length
@@ -40,8 +29,12 @@ export default {
     mounted() {
         this.sortFunc();
         this.loadHotels();
-        EventBus.$on("reloadHotels", ()=>{
+        EventBus.$on("reloadHotels", () => {
             this.loadHotels();
+        })
+        EventBus.$on("sortHotels", (typeID) => {
+            this.sortTypeID = typeID
+            this.sortFunc();
         })
     },
 
@@ -53,27 +46,38 @@ export default {
             getHotels().then(response => {
                 if (response.success) {
                     this.hotels = response.data
+                    this.sortFunc();
                 }
             });
         },
         sortFunc() {
-            if (this.selectedSortTypeID === 1) {
-                this.hotels.sort(function (b, a) {
-                    return b.point - a.point
-                });
-            } else {
-                this.hotels.sort(function (a, b) {
-                    return b.point - a.point
-                });
+
+            const {sortTypeID} = this;
+
+            this.hotels.sort(function (a, b) {
+                return (b.updatedAt || b.createdAt) - (a.updatedAt || a.createdAt)
+            });
+
+            switch (sortTypeID) {
+                case 0:
+                    this.hotels.sort(function (a, b) {
+                        return b.createdAt - a.createdAt
+                    });
+                    break;
+                case 1:
+                    this.hotels.sort(function (a, b) {
+                        return a.point - b.point
+                    });
+                    break;
+
+                case 2:
+                    this.hotels.sort(function (a, b) {
+                        return b.point - a.point
+                    });
+                    break;
+
             }
         },
-        sortType(item) {
-            console.log(item.id)
-            this.selectedSortTypeID = item.id
-            this.sortFunc();
-
-        },
-
 
 
     }
