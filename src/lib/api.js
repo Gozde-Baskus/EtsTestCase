@@ -7,6 +7,7 @@ const addHotels = async (hotel) => {
     try {
         const hotels = JSON.parse(localStorage.getItem("@hotels")) || [];
         hotels.push({
+            point: 0,
             ...hotel,
             createdAt: Date.now()
         });
